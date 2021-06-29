@@ -30,20 +30,44 @@ func InitialMigration() {
 }
 
 func GetUsers(c *fiber.Ctx) error {
-
+	var Users []User
+	DB.Find(&Users)
+	return c.JSON(&Users)
 }
 func GetUser(c *fiber.Ctx) error {
-
+	id := c.Params("id")
+	var user User
+	DB.Find(&user, id)
+	return c.JSONP(&user)
 }
 func SaveUser(c *fiber.Ctx) error {
-
+	user := new(User)
+	if err := c.BodyParser(user); err != nil {
+		return c.Status(500).SendString(err.Error())
+	}
+	DB.Save(&user)
+	return c.JSON(&user)
 }
 func DeleteUser(c *fiber.Ctx) error {
-
+	id := c.Params("id")
+	var user User
+	DB.First(&user, id)
+	if user.Email == "" {
+		return c.Status(500).SendString("User not available")
+	}
+	DB.Delete(&user)
+	return c.SendString("User is delete")
 }
 func UpdateUser(c *fiber.Ctx) error {
-
-}
-func GetUsers(c *fiber.Ctx) error {
-
+	id := c.Params("id")
+	user := new(User)
+	DB.First(&user, id)
+	if user.Email == "" {
+		return c.Status(500).SendString("User not available")
+	}
+	if err := c.BodyParser(&user); err != nil {
+		return c.Status(500).SendString(err.Error())
+	}
+	DB.Save(&user)
+	return c.JSON(&user)
 }

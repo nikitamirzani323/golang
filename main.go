@@ -21,6 +21,6 @@ func main() {
 	user.InitialMigration()
 	app := fiber.New()
 	app.Get("/", hello)
-
+	Routers(app)
 	app.Listen(":3000")
 }
