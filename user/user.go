@@ -29,6 +29,21 @@ func InitialMigration() {
 	DB.AutoMigrate(&User{})
 }
 
-func getUsers(c *fiber.Ctx) error {
+func GetUsers(c *fiber.Ctx) error {
+
+}
+func GetUser(c *fiber.Ctx) error {
+
+}
+func SaveUser(c *fiber.Ctx) error {
+
+}
+func DeleteUser(c *fiber.Ctx) error {
+
+}
+func UpdateUser(c *fiber.Ctx) error {
+
+}
+func GetUsers(c *fiber.Ctx) error {
 
 }

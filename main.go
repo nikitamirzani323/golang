@@ -9,8 +9,12 @@ func hello(c *fiber.Ctx) error {
 	return c.SendString("Welcome Togel")
 }
 
-func Routers(app *fiber.App){
-	app.Get("/user" user.getUsers)
+func Routers(app *fiber.App) {
+	app.Get("/users", user.GetUsers)
+	app.Get("/users/:id", user.GetUser)
+	app.Post("/user", user.SaveUser)
+	app.Delete("/user", user.DeleteUser)
+	app.Put("/user/:id", user.UpdateUser)
 }
 
 func main() {
